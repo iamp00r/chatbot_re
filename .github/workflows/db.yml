@@ -1,0 +1,30 @@
+name: DB
+
+# 마이그레이션과 RLS·정합성 테스트를 빈 Postgres(+pgvector)에서 돌린다. Supabase 키가 필요 없다.
+on:
+  pull_request:
+    paths: ["supabase/**", "scripts/db-test-local.sh", ".github/workflows/db.yml"]
+  push:
+    branches: [main]
+    paths: ["supabase/**", "scripts/db-test-local.sh", ".github/workflows/db.yml"]
+
+jobs:
+  migrations:
+    name: migrations · RLS tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run DB tests
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+        run: scripts/db-test-local.sh
