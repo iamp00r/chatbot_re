@@ -36,6 +36,8 @@ M0 기반 구축 (`docs/03_MVP.md` §4 M0-1 ~ M0-5). 키 없이 할 수 있는 �
 - 이슈와 PR에 라벨(종류 1개 + `area:*` 1개 이상)을 단다.
 
 ## 규칙
+- Next.js는 16 버전이다. 학습 데이터와 API가 다를 수 있으니 `AGENTS.md` 안내대로 `node_modules/next/dist/docs/`를 확인한다.
+- PR 전에 `pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm e2e`가 통과해야 한다(CI와 같음).
 - 커밋은 작게 자주. 백로그 ID(예: `M1-5`)가 있으면 이슈 제목에 적는다.
 - 새 LLM 호출 경로는 반드시 `generation_logs`에 기록한다.
 - 잠긴(locked) 기억은 자동 파이프라인이 절대 덮어쓰지 않는다.
