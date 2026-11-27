@@ -1,0 +1,16 @@
+# env
+.env
+.env*.local
+!.env.example
+
+# deps / build
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+# misc
+.DS_Store
+*.log
+.vercel
