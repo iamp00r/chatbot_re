@@ -1,16 +1,25 @@
-# env
+# env (키는 .env.local에만. .env.example만 커밋)
 .env
-.env*.local
+.env*
 !.env.example
 
 # deps / build
 node_modules/
 .next/
 out/
+build/
 dist/
 coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# test
+playwright-report/
+test-results/
+blob-report/
 
 # misc
 .DS_Store
 *.log
+*.pem
 .vercel
