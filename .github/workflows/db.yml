@@ -3,10 +3,24 @@ name: DB
 # 마이그레이션과 RLS·정합성 테스트를 빈 Postgres(+pgvector)에서 돌린다. Supabase 키가 필요 없다.
 on:
   pull_request:
-    paths: ["supabase/**", "scripts/db-test-local.sh", ".github/workflows/db.yml"]
+    paths:
+      [
+        "supabase/**",
+        "scripts/db-test-local.sh",
+        "src/lib/db/**",
+        "tests/db/**",
+        ".github/workflows/db.yml",
+      ]
   push:
     branches: [main]
-    paths: ["supabase/**", "scripts/db-test-local.sh", ".github/workflows/db.yml"]
+    paths:
+      [
+        "supabase/**",
+        "scripts/db-test-local.sh",
+        "src/lib/db/**",
+        "tests/db/**",
+        ".github/workflows/db.yml",
+      ]
 
 jobs:
   migrations:
@@ -28,3 +42,14 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
         run: scripts/db-test-local.sh
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Drizzle 스키마 ↔ DB 동기화 테스트
+        env:
+          TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/loom_test
+        run: pnpm test tests/db

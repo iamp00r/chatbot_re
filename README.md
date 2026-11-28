@@ -32,6 +32,8 @@ pnpm dev                     # http://localhost:3000
 | `pnpm test` | 단위 테스트 (Vitest) |
 | `pnpm e2e` | E2E 테스트 (Playwright, 빌드 후 실행) |
 
+DB 테스트(마이그레이션·RLS)는 빈 로컬 Postgres가 있을 때 `DATABASE_URL=postgres://… scripts/db-test-local.sh`로 돌린다. CI에서는 자동으로 돈다.
+
 E2E를 처음 돌릴 때는 브라우저를 한 번 설치한다: `pnpm exec playwright install chromium`
 
 ## 기술 스택
