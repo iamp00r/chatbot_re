@@ -39,5 +39,6 @@ Next.js(App Router, TypeScript) · Tailwind + shadcn/ui · Vercel AI SDK · Supa
 - Next.js는 16 버전이다. 학습 데이터와 API가 다를 수 있으니 `AGENTS.md` 안내대로 `node_modules/next/dist/docs/`를 확인한다.
 - PR 전에 `pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm e2e`가 통과해야 한다(CI와 같음).
 - 커밋은 작게 자주. 백로그 ID(예: `M1-5`)가 있으면 이슈 제목에 적는다.
+- 백로그 항목을 끝내는 PR에는 `docs/작업기록/<ID>_<제목>.md`를 함께 넣는다(양식: `docs/작업기록/README.md`). 비개발자인 사용자가 읽고 남에게 설명할 수 있게, 무엇을·어떻게·왜를 쉬운 말로 쓴다. 검수 중 사용자가 물어본 내용도 반영한다.
 - 새 LLM 호출 경로는 반드시 `generation_logs`에 기록한다.
 - 잠긴(locked) 기억은 자동 파이프라인이 절대 덮어쓰지 않는다.
