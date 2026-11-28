@@ -24,7 +24,7 @@
 Next.js(App Router, TypeScript) · Tailwind + shadcn/ui · Vercel AI SDK · Supabase(Postgres, Auth, RLS, Storage) · Drizzle ORM · Zod · TanStack Table · React Flow(@xyflow/react) · Vitest · Playwright · 패키지 매니저 pnpm
 
 ## 다음 작업
-**M0-3 로그인 (#8)**. M0-1·M0-2·M0-4는 끝났다(운영 https://chatbot-re.vercel.app). 순서와 주의점은 `docs/00` "다음 할 일"을 따른다. 그다음 M0-5 LLM 게이트웨이(#10).
+**M0-3 로그인 (#8)** PR 검수 중 → 머지 후 M0-5 LLM 게이트웨이(#10). M0-1·M0-2·M0-4는 끝났다(운영 https://chatbot-re.vercel.app). 순서와 주의점은 `docs/00` "다음 할 일"을 따른다.
 
 ## Git 작업 규칙 (상세: `docs/04_협업규칙.md`)
 - 모든 작업은 **이슈 → 브랜치 → PR** 순서. `main`에 직접 푸시하지 않는다.
