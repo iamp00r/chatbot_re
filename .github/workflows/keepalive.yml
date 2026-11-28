@@ -1,0 +1,29 @@
+name: Keepalive
+
+# Supabase 무료 플랜은 7일 동안 요청이 없으면 프로젝트를 일시정지한다(docs/02 §2).
+# 배포된 앱의 /api/health(DB에 `select 1`)를 주 2회 불러 깨워 둔다.
+# 저장소 Settings → Secrets and variables → Actions → Variables 에 PRODUCTION_URL을 넣어야 동작한다.
+on:
+  schedule:
+    - cron: "17 3 * * 1,4" # 월·목 03:17 UTC (한국 12:17)
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: ping /api/health
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
+    steps:
+      - name: Call health endpoint
+        run: |
+          if [ -z "$PRODUCTION_URL" ]; then
+            echo "::warning::PRODUCTION_URL 변수가 없어 건너뜀 (README '배포' 절 참고)"
+            exit 0
+          fi
+          url="${PRODUCTION_URL%/}/api/health"
+          # 일시정지 직후 첫 요청은 느릴 수 있어 몇 번 재시도한다
+          curl --fail --silent --show-error --max-time 30 \
+            --retry 3 --retry-delay 20 --retry-all-errors "$url"
+          echo
