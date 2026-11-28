@@ -8,6 +8,7 @@
 - MVP 정의서: [docs/03_MVP.md](docs/03_MVP.md)
 - 협업 규칙: [docs/04_협업규칙.md](docs/04_협업규칙.md)
 - 배포: [docs/05_배포.md](docs/05_배포.md)
+- 작업 기록: [docs/작업기록/](docs/작업기록/README.md)
 
 현재 상태: M0(기반 구축) 진행 중.
 
