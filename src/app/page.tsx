@@ -1,4 +1,8 @@
+import { Suspense } from "react";
+
+import { signOut } from "@/app/auth/actions";
 import { Button } from "@/components/ui/button";
+import { requireProfile } from "@/lib/auth/dal";
 
 export default function Home() {
   return (
@@ -8,7 +12,26 @@ export default function Home() {
       <p className="text-lg leading-8 text-muted-foreground">
         기억이 보이고, 고칠 수 있는 AI 캐릭터 채팅.
       </p>
-      <Button disabled>곧 시작합니다</Button>
+      {/* 세션을 읽는 부분만 요청 시점에 스트리밍한다 */}
+      <Suspense fallback={<p className="text-sm text-muted-foreground">불러오는 중…</p>}>
+        <Greeting />
+      </Suspense>
     </main>
+  );
+}
+
+async function Greeting() {
+  const { profile } = await requireProfile();
+  return (
+    <div className="flex items-center gap-4">
+      <p>
+        <span className="font-medium">{profile.nickname}</span>님, 반가워요.
+      </p>
+      <form action={signOut}>
+        <Button type="submit" variant="outline" size="sm">
+          로그아웃
+        </Button>
+      </form>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+import { FAKE_SUPABASE_URL } from "./tests/e2e/support/session";
+
 const PORT = Number(process.env.E2E_PORT ?? 3100);
 const baseURL = `http://localhost:${PORT}`;
 
@@ -25,11 +27,24 @@ export default defineConfig({
       },
     },
   ],
-  // 프로덕션 빌드로 띄워서 테스트한다 (CI와 같은 조건)
-  webServer: {
-    command: `pnpm build && pnpm start --port ${PORT}`,
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
-  },
+  webServer: [
+    // 가짜 Supabase(Auth·REST 일부). 로그인 이후 흐름을 실제 Supabase 없이 검사한다.
+    {
+      command: `node tests/e2e/support/fake-supabase.mjs`,
+      url: `${FAKE_SUPABASE_URL}/health`,
+      reuseExistingServer: !process.env.CI,
+    },
+    // 프로덕션 빌드로 띄워서 테스트한다 (CI와 같은 조건).
+    // NEXT_PUBLIC_* 는 빌드 때 코드에 박히므로 가짜 Supabase 주소로 빌드한다. .env.local보다 우선한다.
+    {
+      command: `pnpm build && pnpm start --port ${PORT}`,
+      url: `${baseURL}/login`,
+      reuseExistingServer: !process.env.CI,
+      timeout: 180_000,
+      env: {
+        NEXT_PUBLIC_SUPABASE_URL: FAKE_SUPABASE_URL,
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: "fake-anon-key",
+      },
+    },
+  ],
 });
