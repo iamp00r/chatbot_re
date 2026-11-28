@@ -24,7 +24,7 @@
 Next.js(App Router, TypeScript) · Tailwind + shadcn/ui · Vercel AI SDK · Supabase(Postgres, Auth, RLS, Storage) · Drizzle ORM · Zod · TanStack Table · React Flow(@xyflow/react) · Vitest · Playwright · 패키지 매니저 pnpm
 
 ## 다음 작업
-M0 기반 구축 (`docs/03_MVP.md` §4 M0-1 ~ M0-5). 키 없이 할 수 있는 것(M0-1 초기화, 마이그레이션 SQL 작성)부터 하고, Supabase 연결이 필요해지면 사용자에게 가입 절차를 안내한다.
+**M0-3 로그인 (#8)**. M0-1·M0-2·M0-4는 끝났다(운영 https://chatbot-re.vercel.app). 순서와 주의점은 `docs/00` "다음 할 일"을 따른다. 그다음 M0-5 LLM 게이트웨이(#10).
 
 ## Git 작업 규칙 (상세: `docs/04_협업규칙.md`)
 - 모든 작업은 **이슈 → 브랜치 → PR** 순서. `main`에 직접 푸시하지 않는다.
