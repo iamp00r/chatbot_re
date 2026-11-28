@@ -13,7 +13,7 @@
 
 ## 배포
 
-- 운영: (배포 후 기입)
+- 운영: https://chatbot-re-tew1.vercel.app (상태: https://chatbot-re-tew1.vercel.app/api/health)
 - `main` 머지 → 자동 배포, PR마다 미리보기 주소. 처음 설정 절차: [docs/05_배포.md](docs/05_배포.md)
 - 상태 확인: `<운영 주소>/api/health`
 
